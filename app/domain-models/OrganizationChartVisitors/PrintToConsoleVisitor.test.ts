@@ -4,9 +4,17 @@ import { Id } from "../Id";
 import { Name } from "../Name";
 import { OrganizationChart } from "../OrganizationChart";
 import data from "../correct-employees.json";
-import { PrintToConsoleVisitor } from "./PrintToConsoleVisitor";
+import { EmployeeLogger, PrintToConsoleVisitor } from "./PrintToConsoleVisitor";
 
-test("Load from correct-employees.json, must build the structure correcly", ()=>{
+class ToMemoryLogger implements EmployeeLogger {
+  public IndexById:any = {};
+  Log(employee: Employee): void {
+    this.IndexById[employee.Id.Value] = employee;
+  }
+
+}
+
+test("Load from correct-employees.json, must visit all the nodes", ()=>{
   const orgStructure = new OrganizationChart();
   data.forEach(d => {
     const employee = new Employee(new Id(d.id + ""), new Name(d.name), d.managerId ? new Id(d.managerId + "") : null, []);
@@ -15,9 +23,17 @@ test("Load from correct-employees.json, must build the structure correcly", ()=>
 
   orgStructure.IsValid;
 
-  const visitor = new PrintToConsoleVisitor();
+  const memoryLogger = new ToMemoryLogger();
+
+  const visitor = new PrintToConsoleVisitor(memoryLogger);
   orgStructure.Accept(visitor);
 
+  data.forEach(d => {
+    const foundEmployee: Employee = memoryLogger.IndexById[d.id + ""];
+    const managerId = foundEmployee.ManagerId ? foundEmployee.ManagerId.Value : null;
+    expect(foundEmployee.Id.Value).equals(d.id + "");
+    expect(managerId).equals(d.managerId ? d.managerId + "": null);
+  })
 
 })
 

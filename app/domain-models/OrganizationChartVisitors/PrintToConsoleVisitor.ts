@@ -1,9 +1,26 @@
 import { Employee } from "../Employee";
 import { OrganizationChartVisitor } from "./OrganizationChartVisitor";
 
-export class PrintToConsoleVisitor implements OrganizationChartVisitor {
-  Visit(employee: Employee): void {
+
+export interface EmployeeLogger {
+  Log(employee: Employee):void;
+}
+
+export class LogToConsole implements EmployeeLogger {
+  Log(employee: Employee): void {
     console.log(employee.Id, ', managerId:', employee.ManagerId);
+  }
+
+}
+export class PrintToConsoleVisitor implements OrganizationChartVisitor {
+  private _logger: EmployeeLogger;
+
+  constructor(logger: EmployeeLogger){
+    this._logger = logger;
+  }
+
+  Visit(employee: Employee): void {
+    this._logger.Log(employee);    
     employee.DirectReports.forEach(dr => {
       this.Visit(dr);
     })
