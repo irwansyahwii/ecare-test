@@ -1,5 +1,6 @@
 import { Employee } from "../Employee";
+import { OrganizationChart } from "../OrganizationChart";
 
 export interface OrganizationChartVisitor {
-  Visit(employee: Employee):void;
+  Visit(employee: Employee, orgChart: OrganizationChart):void;
 }

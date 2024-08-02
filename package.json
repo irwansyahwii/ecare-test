@@ -11,18 +11,21 @@
     "coverage": "vitest run --coverage",
     "prepare": "husky",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,md,mdx,css,yaml,yml}\"",
-    "check": "prettier --check \"**/*.{ts,tsx,js,jsx,md,mdx,css,yaml,yml}\""    
+    "check": "prettier --check \"**/*.{ts,tsx,js,jsx,md,mdx,css,yaml,yml}\""
   },
   "dependencies": {
+    "@xyflow/react": "^12.0.4",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18"
   },
   "devDependencies": {
+    "@types/dagre": "^0.7.52",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "@vitest/coverage-istanbul": "^2.0.5",
+    "dagre": "^0.8.5",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "husky": "^9.1.4",

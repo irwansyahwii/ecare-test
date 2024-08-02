@@ -1,5 +1,6 @@
 import { ApplicationError } from "./ApplicationError";
 import { Employee } from "./Employee";
+import { Id } from "./Id";
 import { OrganizationChartVisitor } from "./OrganizationChartVisitors/OrganizationChartVisitor";
 
 export class OrganizationChart {
@@ -13,6 +14,10 @@ export class OrganizationChart {
 
   public get Tree():Employee[] {
     return this._tree;
+  }
+
+  public GetEmployeeById(id: Id): Employee | null{    
+    return this._indexById[id.Value] || null;
   }
 
   public Add(employee: Employee):void{
@@ -43,6 +48,6 @@ export class OrganizationChart {
   }
 
   public Accept(visitor: OrganizationChartVisitor):void{
-    visitor.Visit(this.Tree[0]);
+    visitor.Visit(this.Tree[0], this);
   }
 }
