@@ -18,10 +18,7 @@ import { OrganizationChart } from '../domain-models/OrganizationChart';
 import { Employee } from '../domain-models/Employee';
 import { Id } from '../domain-models/Id';
 import { Name } from '../domain-models/Name';
-import { DFSVisitor } from '../domain-models/OrganizationChartVisitors/DFSVisitor';
-import { initialNodes, initialEdges } from './nodes-edges';
 import { ReactFlowVisitor } from '../domain-models/OrganizationChartVisitors/ReactFlowVisitor';
-import { IndirectReportsCountVisitor } from '../domain-models/OrganizationChartVisitors/IndirectReportsCountVisitor';
 
 
 const orgStructure = new OrganizationChart();
