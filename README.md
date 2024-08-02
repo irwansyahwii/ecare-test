@@ -150,3 +150,36 @@ make test
 ```
 make tcoverage
 ```
+
+## Questioner Answers
+
+2024 Questionnaire
+
+1. We work remotely (WFH), but we prefer candidates to able to stay in Java island to make
+   accommodation easier. Accomodation such as providing work related peripherals to the
+   employee. Would you be able to meet this criteria? **Answer: Of course and would love to!**
+
+2. Our employment is currently a full-time employment (5 days a week, 8 hours per day).
+   Would you be able to meet this criteria?
+   **Answer: Yes!**
+
+3. There is no gap between our team located in the US and in the Indo. So, are you comfortable
+   conversing in English? **Yes, comfortable!**
+4. Are you comfortable with Object Oriented Programming? **I consider myself as very passionate in OOP**
+5. If you are currently working, why are you finding new job opportunities right now? **I am not currently working**
+6. Based on your experience, what software developer level are you in:
+   a. Entry,
+   b. Mid, or
+   c. Senior?
+   **I consider myself as a Senior**
+7. (Optional, for Senior level) Briefly describe your software design architecture experience &
+   accomplishment. **Answer:**
+   - **I have experience architecting high load transaction using Queue and master-slave architecture.**
+   - **I have experience designing a mobile app for pregnant moms running in AWS with commentig systems and notifications**
+   - **I have experience in architecting and building a web and mobile commerce platform for www.ice.id**
+8. (Optional, for non-fresh graduates) Could you briefly describe your usual “a day in your life as
+   a software developer”?
+   **Answer: A dah in my life starts with my morning Yoga. Then continue to make my breakfast. Then I work on any tasks from Headstarter or building POC for a stock advisor AI that I've been developing. Then in the evening I close my day with another yoga session and then researching on value investing**
+9. This recruitment process requires you to do a take home test which might take 8 hours to
+   finish, but can be worked on for 2 weeks. Are you willing to continue and do the take home
+   test? **Answer: I have done the test**
