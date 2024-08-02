@@ -16,26 +16,36 @@ An employee not having any direct report, need to have a manager"
 class Employee {
   <<AggregateRoot>>
 
-
-
   Id Id
   String Name
   Id ManagerId
-  Employee[] DirectReports
 }
 
 class Id {
+  <<ValueObject>>
   String Value
 }
 
-Employee "Manager" *--> "DirectReports" Employee
+
+class Name {
+  <<ValueObject>>
+  String Value
+}
+
+class OrganizationChart {
+  <<AggregateRoot>>
+}
+
+Employee "0..1 Manager" *-->  "0..* DirectReports"  Employee
+OrganizationChart "1 Tree" *--> "0..1" Employee
+OrganizationChart "1 FlatStructure" *--> "0..*" Employee
 
 ```
 
 Build an application storing employees with their tree hierarchy. An employee may have a manager
 to report. An employee may have direct report(s). An employee having manager may not have any
 direct report. An employee not having manager need to have direct report(s). ~~An employee not
-having any direct report, need to have a manager~~ This business rule overlaps another rule.
+having any direct report, need to have a manager~~ NOTE: This business rule overlaps another rule.
 
 This application should let user to:
 
@@ -97,6 +107,25 @@ for an employee and display his/her managers up to the root of the tree. E.g.,
    Candidate can share the zip file via google drive (shared link), or the code itself via github
    private repo, or gitlab private repo, etc. You can send an invite for the private repo to my
    github or gitlab account under my same email.
+
+## Optional Specifications - Bonus Points
+
+- [x] Providing unit tests is a plus. More coverage is the better.
+- [x] Adding github coverage is a plus.
+- [x] Using a docker container is a plus. This can also make it easier for the reviewer to run the application. Which can make the submission stand out more.
+
+## Assessment
+
+- [x] Code originality
+- [x] OOP implementation and structure
+- [x] Tree structure correctness & its recursive traversal
+- [x] Code structure, readability, modularity, maintainability, and testability
+- [x] Unit tests coverage (If any)
+- [x] Graceful defensive programming on both common cases and unspecified edge cases
+- [x] Clarity of documentation. The easier it is for the reviewer to run and test the application, the
+      more the submission will stand out.
+- [x] Creativity. Surprise us. If the application can be made better, then feel free to upgrade it. As
+      long as the application intention is still the same as described above.
 
 ## How to Build and Run
 
