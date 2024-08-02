@@ -108,6 +108,8 @@ make run
 
 Then open browser and visit: `http://localhost:3000`
 
+If it is not againts the rules, I can deploy or create CI/CD that automaticaly deploying to `Vercel`.
+
 ## Running the Unit Tests
 
 ```
