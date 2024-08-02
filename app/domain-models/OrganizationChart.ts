@@ -1,5 +1,6 @@
 import { ApplicationError } from "./ApplicationError";
 import { Employee } from "./Employee";
+import { OrganizationChartVisitor } from "./OrganizationChartVisitors/OrganizationChartVisitor";
 
 export class OrganizationChart {
   private _tree: Employee[] = [];
@@ -31,10 +32,17 @@ export class OrganizationChart {
 
   public get IsValid():boolean{
     
+    if(this._tree.length > 1){
+      throw new ApplicationError("Only one root node is allowed");
+    }
     for(let i = 0; i < this._flatStructure.length; i++){
       this._flatStructure[i].IsValid
     }
 
     return true;
+  }
+
+  public Accept(visitor: OrganizationChartVisitor):void{
+    visitor.Visit(this.Tree[0]);
   }
 }
