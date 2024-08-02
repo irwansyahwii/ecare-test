@@ -39,32 +39,40 @@ export class Employee {
   ) {
     this._id = id;
     this._name = name;
-    this._managerId = managerId;
+    this._managerId = managerId;    
 
     if (!this.Name) {
       throw new ApplicationError("Name is required");
     }
 
-    directReports.forEach((dr) => {
+
+    directReports.forEach((dr)=> {
+      this.AddDirectReport(dr);
+    })
+
+  }
+
+  public get IsValid():boolean {
+    this._directReports.forEach((dr) => {
       if (!dr.ManagerId) {
         throw new ApplicationError(
-          `Direct report ${dr.Name} has different manager id: ${dr.ManagerId}. Employee id: ${id}`,
+          `Direct report ${dr.Name} has different manager id: ${dr.ManagerId}. Employee id: ${this.Id}`,
         );
       }
       if (dr.ManagerId) {
-        if (!dr.ManagerId.Equals(id)) {
+        if (!dr.ManagerId.Equals(this.Id)) {
           throw new ApplicationError(
-            `Direct report ${dr.Name} has different manager id: ${dr.ManagerId}. Employee id: ${id}`,
+            `Direct report ${dr.Name} has different manager id: ${dr.ManagerId}. Employee id: ${this.Id}`,
           );
         }
       }
 
-      this.AddDirectReport(dr);
+      
     });
 
-    const havingManager: boolean =
-      this._managerId !== null && this._managerId.IsNotEmpty;
-    const hasDirectReports: boolean = directReports.length > 0;
+    const havingManager: boolean = this.ManagerId !== null ;
+    const hasDirectReports: boolean = this.DirectReports.length > 0;
+    // console.log('hasDirectReports:', hasDirectReports)
     if (!havingManager) {
       if (!hasDirectReports) {
         throw new ApplicationError(
@@ -72,6 +80,8 @@ export class Employee {
         );
       }
     }
+
+    return true;
   }
 
   public AddDirectReport(subordinate: Employee) {
@@ -86,6 +96,10 @@ export class Employee {
     }
 
     subordinate.AssignManager(this);
+    this._directReports.push(subordinate);
+
+    assert.isNotNull(subordinate.ManagerId);
+    assert.isTrue(subordinate.ManagerId?.Equals(this.Id));
   }
 
   public AssignManager(manager: Employee) {

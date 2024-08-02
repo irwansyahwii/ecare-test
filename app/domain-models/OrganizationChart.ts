@@ -1,0 +1,40 @@
+import { ApplicationError } from "./ApplicationError";
+import { Employee } from "./Employee";
+
+export class OrganizationChart {
+  private _tree: Employee[] = [];
+  private _indexById:any = {};
+  private _flatStructure: Employee[] = [];
+
+  public get FlatStructure():Employee[]{
+    return this._flatStructure;
+  }
+
+  public get Tree():Employee[] {
+    return this._tree;
+  }
+
+  public Add(employee: Employee):void{
+    if(this._indexById[employee.Id.Value]){
+      throw new ApplicationError(`Employee already exists with id: ${employee.Id}`);
+    }else{
+      this._indexById[employee.Id.Value] = employee;
+    }
+    if(employee.ManagerId === null){
+      this._tree.push(employee);
+    }else{
+      const manager: Employee = this._indexById[employee.ManagerId.Value];
+      manager.AddDirectReport(employee);
+    }
+    this._flatStructure.push(employee);
+  }
+
+  public get IsValid():boolean{
+    
+    for(let i = 0; i < this._flatStructure.length; i++){
+      this._flatStructure[i].IsValid
+    }
+
+    return true;
+  }
+}
