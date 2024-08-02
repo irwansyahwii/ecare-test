@@ -3,8 +3,8 @@ import { Employee } from "../Employee";
 import { Id } from "../Id";
 import { Name } from "../Name";
 import { OrganizationChart } from "../OrganizationChart";
-import data from "../correct-employees.json";
-import forest from "../forest.json";
+import data from "../fake-data/correct-employees.json";
+import forest from "../fake-data/forest.json";
 import { EmployeeLogger, DFSVisitor } from "./DFSVisitor";
 
 class ToMemoryLogger implements EmployeeLogger {

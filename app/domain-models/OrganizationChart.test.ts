@@ -3,9 +3,9 @@ import { ApplicationError } from "./ApplicationError";
 import { Employee } from "./Employee";
 import { Id } from "./Id";
 import { Name } from "./Name";
-import data from "./correct-employees.json";
-import faultyData from "./faulty-employees.json";
-import anotherFaultyData from "./another-faulty-employees.json";
+import data from "./fake-data/correct-employees.json";
+import faultyData from "./fake-data/faulty-employees.json";
+import anotherFaultyData from "./fake-data/another-faulty-employees.json";
 import { OrganizationChart } from "./OrganizationChart";
 
 test("Load from correct-employees.json, must build the structure correcly", ()=>{
