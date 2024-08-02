@@ -17,7 +17,7 @@ export class ReactFlowVisitor implements OrganizationChartVisitor {
   
 
   GetLabel(node: Employee):string{
-    return `${node.Name.toString()} ${node.DirectReports.length}/${node.IndirectReportsCount}`;
+    return `${node.Name.toString()} (${node.DirectReports.length}/${node.IndirectReportsCount})`;
   }
 
   VisitToRoot(start: Employee):void{

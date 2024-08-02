@@ -121,6 +121,7 @@ const LayoutFlow = () => {
       fitView
     >
       <Panel position="top-right">
+        <input type='text'/>
         <button onClick={() => onLayout('TB')}>vertical layout</button>
         <button onClick={() => onLayout('LR')}>horizontal layout</button>
       </Panel>
