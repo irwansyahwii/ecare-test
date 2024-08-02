@@ -16,7 +16,7 @@ class ToMemoryLogger implements EmployeeLogger {
     }
     this.IndexById[key] = employee;
 
-    console.log('id:', employee.Id);
+    
   }
 
 }
