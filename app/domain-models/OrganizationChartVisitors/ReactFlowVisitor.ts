@@ -1,0 +1,76 @@
+import { ApplicationError } from "../ApplicationError";
+import { Employee } from "../Employee";
+import { OrganizationChart } from "../OrganizationChart";
+import { OrganizationChartVisitor } from "./OrganizationChartVisitor";
+
+const position = { x: 0, y: 0 };
+const edgeType = 'smoothstep';
+
+export class ReactFlowVisitor implements OrganizationChartVisitor {
+
+  public initialNodes: any[] = [];
+  public initialEdges: any[] = [];
+
+  public filterName: string = "";
+  private _orgChart: OrganizationChart | null = null;
+  
+
+  VisitToRoot(start: Employee):void{
+    this.initialNodes.push(
+      {
+        id: start.Id.Value,        
+        data: { label: start.Name.toString() },
+        position,
+      }
+    )
+    if(start.ManagerId){
+      this.initialEdges.push({
+        id: `e${start.Id.Value}`,
+        source: start.ManagerId.Value,
+        target: start.Id.Value,
+        type: edgeType, animated: true
+      })
+
+      const manager = this._orgChart?.GetEmployeeById(start.ManagerId!);
+      if(!manager){
+        throw new ApplicationError(`Failed to find manager with id: ${start.ManagerId} for employee id:${start.Id}`)
+      }
+      this.VisitToRoot(manager!);
+
+    }
+
+  }
+
+  Visit(employee: Employee, orgChart: OrganizationChart): void {
+
+    this._orgChart = orgChart;
+
+    if(employee.Name.toString().trim().toLowerCase() === this.filterName.trim().toLowerCase()){
+      this.initialEdges = [];
+      this.initialNodes = [];
+      this.VisitToRoot(employee);
+      return;
+    }
+
+    this.initialNodes.push(
+      {
+        id: employee.Id.Value,        
+        data: { label: employee.Name.toString() },
+        position,
+      }
+    )
+    if(employee.ManagerId){
+      this.initialEdges.push({
+        id: `e${employee.Id.Value}`,
+        source: employee.ManagerId.Value,
+        target: employee.Id.Value,
+        type: edgeType, animated: true
+      })
+    }
+    employee.DirectReports.forEach(dr => {
+      this.Visit(dr, orgChart);
+    });
+
+  }
+
+}
