@@ -16,11 +16,15 @@ export class ReactFlowVisitor implements OrganizationChartVisitor {
   private _orgChart: OrganizationChart | null = null;
   
 
+  GetLabel(node: Employee):string{
+    return `${node.Name.toString()} ${node.DirectReports.length}/${node.IndirectReportsCount}`;
+  }
+
   VisitToRoot(start: Employee):void{
     this.initialNodes.push(
       {
         id: start.Id.Value,        
-        data: { label: `${start.Name.toString()} ${start.DirectReports.length}/${start.IndirectReportsCount}` },
+        data: { label: this.GetLabel(start) },
         position,
       }
     )
@@ -62,7 +66,7 @@ export class ReactFlowVisitor implements OrganizationChartVisitor {
     this.initialNodes.push(
       {
         id: employee.Id.Value,        
-        data: { label: `${employee.Name.toString()} ${employee.DirectReports.length}/${employee.IndirectReportsCount}` },
+        data: { label: this.GetLabel(employee) },
         position,
       }
     )
