@@ -12,7 +12,7 @@ export class LogToConsole implements EmployeeLogger {
   }
 
 }
-export class PrintToConsoleVisitor implements OrganizationChartVisitor {
+export class DFSVisitor implements OrganizationChartVisitor {
   private _logger: EmployeeLogger;
 
   constructor(logger: EmployeeLogger){

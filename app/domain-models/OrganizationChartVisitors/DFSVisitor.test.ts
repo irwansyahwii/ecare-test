@@ -5,7 +5,7 @@ import { Name } from "../Name";
 import { OrganizationChart } from "../OrganizationChart";
 import data from "../correct-employees.json";
 import forest from "../forest.json";
-import { EmployeeLogger, PrintToConsoleVisitor } from "./PrintToConsoleVisitor";
+import { EmployeeLogger, DFSVisitor } from "./DFSVisitor";
 
 class ToMemoryLogger implements EmployeeLogger {
   public IndexById:any = {};
@@ -32,7 +32,7 @@ test("Load from correct-employees.json, must visit all the nodes only once", ()=
 
   const memoryLogger = new ToMemoryLogger();
 
-  const visitor = new PrintToConsoleVisitor(memoryLogger);
+  const visitor = new DFSVisitor(memoryLogger);
   orgStructure.Accept(visitor);
 
   for(let i = 0 ; i < data.length; i++){
@@ -58,7 +58,7 @@ test("Load from forest.json, must visit all the nodes only once", ()=>{
 
   const memoryLogger = new ToMemoryLogger();
 
-  const visitor = new PrintToConsoleVisitor(memoryLogger);
+  const visitor = new DFSVisitor(memoryLogger);
   orgStructure.Accept(visitor);
 
   for(let i = 0 ; i < forest.length; i++){
