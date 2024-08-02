@@ -151,7 +151,7 @@ make test
 make tcoverage
 ```
 
-## Questioner Answers
+## Questionnaire Answers
 
 2024 Questionnaire
 
@@ -174,7 +174,7 @@ make tcoverage
    **I consider myself as a Senior**
 7. (Optional, for Senior level) Briefly describe your software design architecture experience &
    accomplishment. **Answer:**
-   - **I have experience architecting high load transaction using Queue and master-slave architecture.**
+   - **I have experience architecting high load transactions system using Queue and master-slave architecture.**
    - **I have experience designing a mobile app for pregnant moms running in AWS with commentig systems and notifications**
    - **I have experience in architecting and building a web and mobile commerce platform for www.ice.id**
 8. (Optional, for non-fresh graduates) Could you briefly describe your usual “a day in your life as
