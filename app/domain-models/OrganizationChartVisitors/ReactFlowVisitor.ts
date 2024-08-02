@@ -1,6 +1,7 @@
 import { ApplicationError } from "../ApplicationError";
 import { Employee } from "../Employee";
 import { OrganizationChart } from "../OrganizationChart";
+import { IndirectReportsCountVisitor } from "./IndirectReportsCountVisitor";
 import { OrganizationChartVisitor } from "./OrganizationChartVisitor";
 
 const position = { x: 0, y: 0 };
@@ -19,7 +20,7 @@ export class ReactFlowVisitor implements OrganizationChartVisitor {
     this.initialNodes.push(
       {
         id: start.Id.Value,        
-        data: { label: start.Name.toString() },
+        data: { label: `${start.Name.toString()} ${start.DirectReports.length}/${start.IndirectReportsCount}` },
         position,
       }
     )
@@ -52,10 +53,16 @@ export class ReactFlowVisitor implements OrganizationChartVisitor {
       return;
     }
 
+    const indirectReportsVisitor = new IndirectReportsCountVisitor();
+    indirectReportsVisitor.Visit(employee, orgChart);
+
+    employee.IndirectReportsCount = indirectReportsVisitor.IndirectReportsCount;
+
+
     this.initialNodes.push(
       {
         id: employee.Id.Value,        
-        data: { label: employee.Name.toString() },
+        data: { label: `${employee.Name.toString()} ${employee.DirectReports.length}/${employee.IndirectReportsCount}` },
         position,
       }
     )
@@ -67,6 +74,7 @@ export class ReactFlowVisitor implements OrganizationChartVisitor {
         type: edgeType, animated: true
       })
     }
+
     employee.DirectReports.forEach(dr => {
       this.Visit(dr, orgChart);
     });

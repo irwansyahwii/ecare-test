@@ -21,6 +21,7 @@ import { Name } from '../domain-models/Name';
 import { DFSVisitor } from '../domain-models/OrganizationChartVisitors/DFSVisitor';
 import { initialNodes, initialEdges } from './nodes-edges';
 import { ReactFlowVisitor } from '../domain-models/OrganizationChartVisitors/ReactFlowVisitor';
+import { IndirectReportsCountVisitor } from '../domain-models/OrganizationChartVisitors/IndirectReportsCountVisitor';
 
 
 const orgStructure = new OrganizationChart();
@@ -31,9 +32,13 @@ data.forEach(d => {
 
 orgStructure.IsValid;
 
+// const indirectReportsVisitor = new IndirectReportsCountVisitor();
+// orgStructure.Accept(indirectReportsVisitor);
+
 const visitor = new ReactFlowVisitor();
-visitor.filterName = "evelina";
+// visitor.filterName = "Evelina";
 orgStructure.Accept(visitor);
+
 
 const dagreGraph = new dagre.graphlib.Graph();
 dagreGraph.setDefaultEdgeLabel(() => ({}));

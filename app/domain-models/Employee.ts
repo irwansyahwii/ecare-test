@@ -14,6 +14,7 @@ export class Employee {
   private _name: Name;
   private _managerId: Id | null;
   private _directReports: Employee[] = [];
+  public IndirectReportsCount: number = 0;
 
   public get Id(): Id {
     return this._id;
