@@ -72,9 +72,11 @@ for an employee and display his/her managers up to the root of the tree. E.g.,
       is also up to you. E.g. It can be a REST API application, or it can be a CLI, or it can be a web app,
       etc. Surprise us.
 
-3. The employee hierarchy structure needs to be in a correct Tree structure. Traverse recursively
-   instead of iteratively.
-4. The application needs to store employees in memory (no database).
+- [x] The employee hierarchy structure needs to be in a correct Tree structure. Traverse recursively
+      instead of iteratively.
+
+- [x] The application needs to store employees in memory (no database).
+
 5. The aim of this test is to create the code as elegant, readable, modular, maintainable, and
    testable as possible. This point here is where you should emphasize and showcase your coding
    skill & cleanliness. This is to assess how the candidate writes code in a team environment,
