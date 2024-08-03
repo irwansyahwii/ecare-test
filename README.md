@@ -2,6 +2,8 @@
 
 This is the solution for ECare (company name hidden) Test.
 
+<video src='docs/ectest-440.mov' width=180/>
+
 ## Domain Models
 
 ```mermaid
