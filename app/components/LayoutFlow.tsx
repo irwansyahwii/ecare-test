@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   ReactFlow,
   addEdge,
@@ -9,32 +9,13 @@ import {
   useEdgesState,
 } from '@xyflow/react';
 import dagre from 'dagre';
-import data from "../domain-models/fake-data/correct-employees.json";
-
-// import { initialNodes, initialEdges } from './nodes-edges';
+import { observer } from "mobx-react-lite";
 
 import '@xyflow/react/dist/style.css';
-import { OrganizationChart } from '../domain-models/OrganizationChart';
-import { Employee } from '../domain-models/Employee';
-import { Id } from '../domain-models/Id';
-import { Name } from '../domain-models/Name';
-import { ReactFlowVisitor } from '../domain-models/OrganizationChartVisitors/ReactFlowVisitor';
-
-
-const orgStructure = new OrganizationChart();
-data.forEach(d => {
-  const employee = new Employee(new Id(d.id + ""), new Name(d.name), d.managerId ? new Id(d.managerId + "") : null, []);
-  orgStructure.Add(employee);
-});
-
-orgStructure.IsValid;
-
-// const indirectReportsVisitor = new IndirectReportsCountVisitor();
-// orgStructure.Accept(indirectReportsVisitor);
-
-const visitor = new ReactFlowVisitor();
-// visitor.filterName = "Evelina";
-orgStructure.Accept(visitor);
+import { OrganizationChartStore} from '../store/OrganizationChartStore';
+import { action } from 'mobx';
+import { useStores } from '../store/useStore';
+import { Autocomplete, Button, Input, TextField } from '@mui/material';
 
 
 const dagreGraph = new dagre.graphlib.Graph();
@@ -77,18 +58,28 @@ const getLayoutedElements = (nodes: any, edges: any, direction = 'TB') => {
   return { nodes: newNodes, edges };
 };
 
-console.log(visitor.initialNodes)
-console.log(visitor.initialEdges)
 
-const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
-  visitor.initialNodes,
-  visitor.initialEdges,
-);
+export const LayoutFlow = ({orgChartStore}: {orgChartStore: OrganizationChartStore}) => {
 
-const LayoutFlow = () => {
-  const [nodes, setNodes, onNodesChange] = useNodesState(layoutedNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(layoutedEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState<any>([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState<any>([]);
 
+  const [filterValue, setFilterValue] = useState("");
+
+  useEffect(()=> {
+    
+    orgChartStore.ApplyFilter(filterValue);
+    const { nodes: layoutedNodes, edges: layoutedEdges } = getLayoutedElements(
+      orgChartStore.visitor.initialNodes,
+      orgChartStore.visitor.initialEdges,
+    );
+
+    setNodes(layoutedNodes);
+    setEdges(layoutedEdges);
+
+    
+  }, [orgChartStore, setEdges, setNodes, filterValue]);
+  
   const onConnect = useCallback(
     (params:any) =>
       setEdges((eds) =>
@@ -97,7 +88,7 @@ const LayoutFlow = () => {
           eds,
         ),
       ),
-    [],
+    [setEdges],
   );
   const onLayout = useCallback(
     (direction:any) => {
@@ -107,8 +98,25 @@ const LayoutFlow = () => {
       setNodes([...layoutedNodes]);
       setEdges([...layoutedEdges]);
     },
-    [nodes, edges],
+    [nodes, edges, setEdges, setNodes],
   );
+
+  const applyFilter = (e:any, selected:any)=> {
+    console.log(selected);
+    if(selected){
+      setFilterValue(selected.label);          
+    }else{
+      setFilterValue("");
+    }
+  }
+
+  const [filterOptions, setFilterOptions] = useState<{id:string, label:string}[]>([]);
+
+  useEffect(()=> {
+    setFilterOptions(orgChartStore.orgStructure.FlatStructure.map(x => {
+      return ({id: x.Id.Value, label: x.Name.toString()});
+    }));
+  }, [orgChartStore.orgStructure.FlatStructure]);
 
   return (
     <ReactFlow
@@ -121,12 +129,25 @@ const LayoutFlow = () => {
       fitView
     >
       <Panel position="top-right">
-        <input type='text'/>
-        <button onClick={() => onLayout('TB')}>vertical layout</button>
-        <button onClick={() => onLayout('LR')}>horizontal layout</button>
+        <Autocomplete
+          disablePortal
+          id="combo-box-demo"
+          onChange={applyFilter}          
+          options={filterOptions}
+          sx={{ width: 300 }}
+          renderInput={(params) => <TextField {...params} label="Filter By Employee Name..." />}
+        />
+        {/* <Button variant='outlined' onClick={applyFilter}>Apply Filter</Button> */}
+        <Button variant='outlined' onClick={() => onLayout('TB')}>vertical layout</Button>
+        <Button variant='outlined' onClick={() => onLayout('LR')}>horizontal layout</Button>
       </Panel>
     </ReactFlow>
   );
 };
 
-export default LayoutFlow;
+export const LayoutFlowClientSide = ()=>{
+  const {orgChartStore} = useStores();
+  return (
+    <LayoutFlow orgChartStore={orgChartStore}></LayoutFlow>
+  )
+};

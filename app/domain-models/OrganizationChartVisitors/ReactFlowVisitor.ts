@@ -9,11 +9,28 @@ const edgeType = 'smoothstep';
 
 export class ReactFlowVisitor implements OrganizationChartVisitor {
 
+  Clear() {
+    this.initialEdges = [];
+    this.initialNodes = [];
+    
+  }
+
   public initialNodes: any[] = [];
   public initialEdges: any[] = [];
 
-  public filterName: string = "";
+  private _filterName: string = "";
   private _orgChart: OrganizationChart | null = null;
+  private _stopRegularVisit: boolean = false;
+
+
+  public set Filtername(value:string){
+    this._filterName =value;
+    this._stopRegularVisit = false;
+  }
+
+  public get FilterName():string {
+    return this._filterName;
+  }
   
 
   GetLabel(node: Employee):string{
@@ -50,9 +67,9 @@ export class ReactFlowVisitor implements OrganizationChartVisitor {
 
     this._orgChart = orgChart;
 
-    if(employee.Name.toString().trim().toLowerCase() === this.filterName.trim().toLowerCase()){
-      this.initialEdges = [];
-      this.initialNodes = [];
+    if(employee.Name.toString().trim().toLowerCase() === this.FilterName.trim().toLowerCase()){
+      this._stopRegularVisit = true;
+      this.Clear();      
       this.VisitToRoot(employee);
       return;
     }
@@ -80,7 +97,9 @@ export class ReactFlowVisitor implements OrganizationChartVisitor {
     }
 
     employee.DirectReports.forEach(dr => {
-      this.Visit(dr, orgChart);
+      if(!this._stopRegularVisit){
+        this.Visit(dr, orgChart);
+      }      
     });
 
   }

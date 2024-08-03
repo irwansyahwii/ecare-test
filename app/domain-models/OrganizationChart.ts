@@ -47,7 +47,8 @@ export class OrganizationChart {
     return true;
   }
 
-  public Accept(visitor: OrganizationChartVisitor):void{
+  public Accept(visitor: OrganizationChartVisitor):void{    
+    visitor.Clear();
     visitor.Visit(this.Tree[0], this);
   }
 }

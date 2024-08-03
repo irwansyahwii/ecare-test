@@ -15,26 +15,22 @@ test("Output the correct nodes, edges, direct report and indirect reports counts
 
   orgStructure.IsValid;
 
-  // const indirectReportsVisitor = new IndirectReportsCountVisitor();
-  // orgStructure.Accept(indirectReportsVisitor);
-
   const visitor = new ReactFlowVisitor();
-  // visitor.filterName = "Evelina";
   orgStructure.Accept(visitor);
 
   const expectedNodes = [
-    { id: '1', data: { label: 'raelynn 2/9' }, position: { x: 0, y: 0 } },
-    { id: '2', data: { label: 'darin 3/3' }, position: { x: 0, y: 0 } },
-    { id: '4', data: { label: 'jordana 0/0' }, position: { x: 0, y: 0 } },
-    { id: '5', data: { label: 'everett 0/0' }, position: { x: 0, y: 0 } },
-    { id: '6', data: { label: 'bertha 0/0' }, position: { x: 0, y: 0 } },
-    { id: '3', data: { label: 'kacie 3/4' }, position: { x: 0, y: 0 } },
-    { id: '7', data: { label: 'peg 0/0' }, position: { x: 0, y: 0 } },
-    { id: '8', data: { label: 'hugh 0/0' }, position: { x: 0, y: 0 } },
-    { id: '9', data: { label: 'eveleen 1/1' }, position: { x: 0, y: 0 } },
+    { id: '1', data: { label: 'raelynn (2/9)' }, position: { x: 0, y: 0 } },
+    { id: '2', data: { label: 'darin (3/3)' }, position: { x: 0, y: 0 } },
+    { id: '4', data: { label: 'jordana (0/0)' }, position: { x: 0, y: 0 } },
+    { id: '5', data: { label: 'everett (0/0)' }, position: { x: 0, y: 0 } },
+    { id: '6', data: { label: 'bertha (0/0)' }, position: { x: 0, y: 0 } },
+    { id: '3', data: { label: 'kacie (3/4)' }, position: { x: 0, y: 0 } },
+    { id: '7', data: { label: 'peg (0/0)' }, position: { x: 0, y: 0 } },
+    { id: '8', data: { label: 'hugh (0/0)' }, position: { x: 0, y: 0 } },
+    { id: '9', data: { label: 'eveleen (1/1)' }, position: { x: 0, y: 0 } },
     {
       id: '10',
-      data: { label: 'evelina 0/0' },
+      data: { label: 'evelina (0/0)' },
       position: { x: 0, y: 0 }
     }
   ]

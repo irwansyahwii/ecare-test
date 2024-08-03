@@ -18,6 +18,9 @@ export class DFSVisitor implements OrganizationChartVisitor {
   constructor(logger: EmployeeLogger){
     this._logger = logger;
   }
+  Clear(): void {
+    
+  }
 
   Visit(employee: Employee): void {
     this._logger.Log(employee);    

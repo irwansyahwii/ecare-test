@@ -1,12 +1,14 @@
 import Image from "next/image";
 import styles from "./page.module.css";
-import LayoutFlow from "./components/LayoutFlow";
+
 import { StrictMode } from "react";
+import { LayoutFlowClientSide } from "./components/LayoutFlow";
 
 export default function Home() {
   return (
     <div id="root">
-      <LayoutFlow></LayoutFlow>
+
+      <LayoutFlowClientSide></LayoutFlowClientSide>
     </div>
   );
 }
