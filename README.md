@@ -2,7 +2,8 @@
 
 This is the solution for ECare (company name hidden) Test.
 
-<video src='docs/ectest-440.mov' width=180/>
+<img width="1601" alt="Screenshot 2024-08-03 at 14 10 09" src="https://github.com/user-attachments/assets/22b23957-d8a3-41f9-bb7b-6925054455e0">
+
 
 ## Domain Models
 
