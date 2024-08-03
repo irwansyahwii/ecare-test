@@ -4,7 +4,6 @@ This is the solution for ECare (company name hidden) Test.
 
 <img width="1601" alt="Screenshot 2024-08-03 at 14 10 09" src="https://github.com/user-attachments/assets/22b23957-d8a3-41f9-bb7b-6925054455e0">
 
-
 ## Domain Models
 
 ```mermaid
@@ -52,10 +51,10 @@ having any direct report, need to have a manager~~ NOTE: This business rule over
 
 This application should let user to:
 
-1. Search for an employee,
-2. Display all his/her managers name up to the root of the tree,
-3. Display the total count of his/her direct reports, and
-4. Display the total count of his/her indirect reports.
+1. [x] Search for an employee,
+2. [x] Display all his/her managers name up to the root of the tree,
+3. [x] Display the total count of his/her direct reports, and
+4. [x] Display the total count of his/her indirect reports.
 
 ### Example
 
@@ -63,16 +62,18 @@ Please refers to the attached `correct-employees.json` file for employees hierar
 application should be able to store this employees hierarchy. The end user should be able to search
 for an employee and display his/her managers up to the root of the tree. E.g.,
 
-1. When the user searches for “Evelina”, then the application should be able to show “Evelina”,
-   and display her managers up to the root of the tree, which are: "Eveleen", "Kacie", and
-   "Raelynn".
-2. When the user searches for “Martin”, the application should be able to handle it. For
-   example, displaying a not found message. (Find other edge cases for bonus points)
-   Please also refers to the attached `faulty-employees.json` file for another example. In this hierarchy,
+1. [x] When the user searches for “Evelina”, then the application should be able to show “Evelina”,
+       and display her managers up to the root of the tree, which are: "Eveleen", "Kacie", and
+       "Raelynn".
+2. [x] When the user searches for “Martin”, the application should be able to handle it. For
+       example, displaying a not found message. (Find other edge cases for bonus points)
+
+   [x] Please also refers to the attached `faulty-employees.json` file for another example. In this hierarchy,
    “Keane” and “Kylee” don’t have any hierarchy. The application should be able to handle it and display
    an error message such as “Unable to process employeee hierarchy. Keane, Kylee not having
-   hierarchy”
-   . (Find other edge cases for bonus points)
+   hierarchy”.
+
+   [x] (Find other edge cases for bonus points)
    Another example can be seen from `another-faulty-employees.json` file. In this hierarchy, “Linton”
    has multiple managers. The application should be able to handle it and display an error message
    such as “Unable to process employee tree. Linton has multiple managers: Fletcher, Tabitha”
@@ -101,7 +102,7 @@ for an employee and display his/her managers up to the root of the tree. E.g.,
   - [x] The code itself
   - [x] Instruction how to build and run the application,
   - [x] Instruction how to run the unit tests (if any),
-  - Providing Demo video / screenshots of the application,
+  - [x] Providing Demo video / screenshots of the application,
   - [x] Unit tests coverage are a plus (optional, helpful).
   - [x] The easier it is for the reviewer to see the application running, the more the submission will stand out.
 
