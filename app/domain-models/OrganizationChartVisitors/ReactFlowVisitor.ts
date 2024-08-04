@@ -18,18 +18,18 @@ export class ReactFlowVisitor implements OrganizationChartVisitor {
   public initialNodes: any[] = [];
   public initialEdges: any[] = [];
 
-  private _filterName: string = "";
+  private _filterById: string = "";
   private _orgChart: OrganizationChart | null = null;
   private _stopRegularVisit: boolean = false;
 
 
-  public set Filtername(value:string){
-    this._filterName =value;
+  public set FilterById(value:string){
+    this._filterById =value;
     this._stopRegularVisit = false;
   }
 
-  public get FilterName():string {
-    return this._filterName;
+  public get FilterById():string {
+    return this._filterById;
   }
   
 
@@ -67,7 +67,7 @@ export class ReactFlowVisitor implements OrganizationChartVisitor {
 
     this._orgChart = orgChart;
 
-    if(employee.Name.toString().trim().toLowerCase() === this.FilterName.trim().toLowerCase()){
+    if(employee.Id.Value === this.FilterById){
       this._stopRegularVisit = true;
       this.Clear();      
       this.VisitToRoot(employee);

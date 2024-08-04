@@ -26,8 +26,8 @@ export class OrganizationChartStore {
        
   }
 
-  public ApplyFilter(value: string){    
-    this.visitor.Filtername = value;   
+  public ApplyFilter(id: string){    
+    this.visitor.FilterById = id;   
     
     this.orgStructure.Accept(this.visitor); 
     

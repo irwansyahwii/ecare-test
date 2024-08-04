@@ -101,10 +101,9 @@ export const LayoutFlow = ({orgChartStore}: {orgChartStore: OrganizationChartSto
     [nodes, edges, setEdges, setNodes],
   );
 
-  const applyFilter = (e:any, selected:any)=> {
-    console.log(selected);
+  const applyFilter = (e:any, selected:any)=> {    
     if(selected){
-      setFilterValue(selected.label);          
+      setFilterValue(selected.id);          
     }else{
       setFilterValue("");
     }
@@ -114,7 +113,7 @@ export const LayoutFlow = ({orgChartStore}: {orgChartStore: OrganizationChartSto
 
   useEffect(()=> {
     setFilterOptions(orgChartStore.orgStructure.FlatStructure.map(x => {
-      return ({id: x.Id.Value, label: x.Name.toString()});
+      return ({id: x.Id.Value, label: x.Name.toString() + ` - ${x.Id.Value}`});
     }));
   }, [orgChartStore.orgStructure.FlatStructure]);
 
