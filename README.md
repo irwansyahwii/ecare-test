@@ -61,6 +61,12 @@ This application should let user to:
 ```mermaid
 sequenceDiagram
 
+participant React
+participant OrganizationChatStore
+participant OrganizationChart
+participant ReactFlowVisitor
+Note right of ReactFlowVisitor: A Visitor Design Pattern
+
 React ->> OrganizationChatStore: new()
 OrganizationChatStore ->> OrganizationChart: new()
 OrganizationChatStore ->> ReactFlowVisitor: new()
