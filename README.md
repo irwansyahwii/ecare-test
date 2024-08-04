@@ -56,6 +56,46 @@ This application should let user to:
 3. [x] Display the total count of his/her direct reports, and
 4. [x] Display the total count of his/her indirect reports.
 
+## How It Works
+
+```mermaid
+sequenceDiagram
+
+React ->> OrganizationChatStore: new()
+OrganizationChatStore ->> OrganizationChart: new()
+OrganizationChatStore ->> ReactFlowVisitor: new()
+ReactFlowVisitor -->> OrganizationChatStore: visitor
+OrganizationChatStore ->> OrganizationChatStore: Load correct-employees.json
+loop for each correct-employees data, build the tree
+   OrganizationChatStore ->> Employee: new(data)
+   Employee -->> OrganizationChatStore: employee
+   OrganizationChatStore ->> OrganizationChart: Add(employee)
+   alt employee has no manager
+      OrganizationChart ->> OrganizationChart: Add to root nodes
+   else employee having a manager
+      OrganizationChart ->> OrganizationChart: Find manager by Id
+      OrganizationChart -->> OrganizationChart: manager
+      OrganizationChart ->> Employee: AddDirectReport(employee)
+   end
+end
+OrganizationChatStore ->> OrganizationChart: IsValid
+OrganizationChart ->> OrganizationChart: Validate the tree and Validate all employees
+
+React ->> OrganizationChatStore: ApplyFilter(filterValue)
+OrganizationChatStore ->> ReactFlowVisitor: FilterById
+OrganizationChatStore ->> OrganizationChart: Accept(visitor)
+OrganizationChart ->> ReactFlowVisitor: Visit
+alt current filter value matched one of employee
+   ReactFlowVisitor ->> ReactFlowVisitor: VisitUpToRoot and build the ReactFlow's initialNodes and initialEdges
+else
+   ReactFlowVisitor ->> ReactFlowVisitor: Visit the tree using DSF and build the ReactFlow's initialNodes and initialEdges
+end
+ReactFlowVisitor -->> React: initialNodes, initialEdges
+
+React ->> React: Draw the Organization Chart
+
+```
+
 ### Example
 
 Please refers to the attached `correct-employees.json` file for employees hierarchy example. The
