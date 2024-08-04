@@ -87,6 +87,8 @@ end
 OrganizationChatStore ->> OrganizationChart: IsValid
 OrganizationChart ->> OrganizationChart: Validate the tree and Validate all employees
 
+OrganizationChatStore -->> React: orgChatStore containing the three
+
 React ->> OrganizationChatStore: ApplyFilter(filterValue)
 OrganizationChatStore ->> ReactFlowVisitor: FilterById
 OrganizationChatStore ->> OrganizationChart: Accept(visitor)
