@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { StoreProvider } from "./store/StoreProvider";
 import Head from "next/head";
+import ErrorBoundary from './components/ErrorBoundary'
+
 // import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter';
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,11 +24,13 @@ export default function RootLayout({
         <meta name="viewport" content="initial-scale=1, width=device-width" />
       </Head>
       <body className={inter.className}>
-        <StoreProvider>
-          
-            {children}
-          
-        </StoreProvider>
+        <ErrorBoundary>
+          <StoreProvider>
+            
+              {children}
+            
+          </StoreProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

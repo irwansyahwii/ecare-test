@@ -1,5 +1,5 @@
 import { OrganizationChart } from "../domain-models/OrganizationChart";
-import data from "../domain-models/fake-data/correct-employees.json";
+import data from "../domain-models/fake-data/faulty-employees.json";
 import { Employee } from "../domain-models/Employee";
 import { Id } from "../domain-models/Id";
 import { Name } from "../domain-models/Name";
