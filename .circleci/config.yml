@@ -7,7 +7,7 @@ version: 2.1
 orbs:
   # See the Node orb documentation here: https://circleci.com/developer/orbs/orb/circleci/node
   node: circleci/node@5.2
-  codecov: codecov/codecov@4.0.1
+  codecov: codecov/codecov@4.1.0
 
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/workflows/ & https://circleci.com/docs/configuration-reference/#workflows
