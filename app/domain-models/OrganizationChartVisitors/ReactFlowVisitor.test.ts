@@ -133,7 +133,7 @@ const expectedEdges = [
   }
 ]
 
-  console.log(visitor.initialEdges)
+  
   expect(visitor.initialNodes).toEqual(expectedNodes)
   expect(visitor.initialEdges).toEqual(expectedEdges)
 

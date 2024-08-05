@@ -73,7 +73,7 @@ export class Employee {
 
     const havingManager: boolean = this.ManagerId !== null ;
     const hasDirectReports: boolean = this.DirectReports.length > 0;
-    // console.log('hasDirectReports:', hasDirectReports)
+    
     if (!havingManager) {
       if (!hasDirectReports) {
         throw new ApplicationError(
