@@ -54,7 +54,7 @@ This application should let user to:
 1. [x] Search for an employee,
 2. [x] Display all his/her managers name up to the root of the tree,
 3. [x] Display the total count of his/her direct reports, and
-4. [x] Display the total count of his/her indirect reports.
+4. [x] Display the total count of his/her indirect reports. Today, 12th Aug 2024. After demoing the system with Pak Samuel and Pak Arif, I realised that I made mistake in the indirect reports count. The one currently shown is the count of the direct reports slash the total count of the whole (direct and indirect reports). I made this way since it looks better and more intuitif. If we choose to display the indirect reports than the UI will look illogical, we might have to show it like this: Eveleen (3/1). Where our intuition should say: Eveleen (3/6) where the right number always bigger then the left one.
 
 ## How It Works
 
