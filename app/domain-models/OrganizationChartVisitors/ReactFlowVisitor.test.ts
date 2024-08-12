@@ -21,10 +21,10 @@ test("Output the correct nodes, edges, direct report and indirect reports counts
   const expectedNodes = [
   {
     id: '1',
-    data: { label: 'raelynn (3/10)' },
+    data: { label: 'raelynn (3/7)' },
     position: { x: 0, y: 0 }
   },
-  { id: '2', data: { label: 'darin (3/3)' }, position: { x: 0, y: 0 } },
+  { id: '2', data: { label: 'darin (3/0)' }, position: { x: 0, y: 0 } },
   {
     id: '4',
     data: { label: 'jordana (0/0)' },
@@ -40,12 +40,12 @@ test("Output the correct nodes, edges, direct report and indirect reports counts
     data: { label: 'bertha (0/0)' },
     position: { x: 0, y: 0 }
   },
-  { id: '3', data: { label: 'kacie (3/4)' }, position: { x: 0, y: 0 } },
+  { id: '3', data: { label: 'kacie (3/1)' }, position: { x: 0, y: 0 } },
   { id: '7', data: { label: 'peg (0/0)' }, position: { x: 0, y: 0 } },
   { id: '8', data: { label: 'hugh (0/0)' }, position: { x: 0, y: 0 } },
   {
     id: '9',
-    data: { label: 'eveleen (1/1)' },
+    data: { label: 'eveleen (1/0)' },
     position: { x: 0, y: 0 }
   },
   {

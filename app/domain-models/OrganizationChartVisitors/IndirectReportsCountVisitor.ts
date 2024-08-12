@@ -9,7 +9,8 @@ export class IndirectReportsCountVisitor implements OrganizationChartVisitor {
   public IndirectReportsCount:number = 0;
   Visit(employee: Employee, orgChart: OrganizationChart): void {
     employee.DirectReports.forEach(dr => {
-      this.CountIndirectReports(dr);
+      // this.CountIndirectReports(dr);
+      this.VisitTheDirectReports(dr);
     })
 
     employee.IndirectReportsCount = this.IndirectReportsCount;
@@ -17,6 +18,12 @@ export class IndirectReportsCountVisitor implements OrganizationChartVisitor {
 
   CountIndirectReports(employee: Employee){
     this.IndirectReportsCount++;
+    employee.DirectReports.forEach(dr => {
+      this.CountIndirectReports(dr);
+    })
+  }
+
+  VisitTheDirectReports(employee: Employee){
     employee.DirectReports.forEach(dr => {
       this.CountIndirectReports(dr);
     })

@@ -77,9 +77,6 @@ export class ReactFlowVisitor implements OrganizationChartVisitor {
     const indirectReportsVisitor = new IndirectReportsCountVisitor();
     indirectReportsVisitor.Visit(employee, orgChart);
 
-    employee.IndirectReportsCount = indirectReportsVisitor.IndirectReportsCount;
-
-
     this.initialNodes.push(
       {
         id: employee.Id.Value,        
